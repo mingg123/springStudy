@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
 
 
-    @GetMapping("/hello2") //http:/localhost:9090/api/hello
-    public String hello2() {
+    @GetMapping("/hello") //http:/localhost:9090/api/hello
+    public String hello() {
         return "hello spring boot23!";
     }
 
