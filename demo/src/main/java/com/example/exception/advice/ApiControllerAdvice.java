@@ -1,5 +1,7 @@
 package com.example.exception.advice;
 
+import com.example.exception.controller.exceptionApiController;
+
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,15 +9,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice(basePackages = "com.example.exception")
-public class GlobalControllerAdvice {
+// @RestControllerAdvice(basePackages = "com.example.exception")
+@RestControllerAdvice(basePackageClasses = exceptionApiController.class)
+public class ApiControllerAdvice {
     
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity exception(Exception e) {
-        System.out.println("-----------------------");
-        System.out.println(e.getLocalizedMessage());
-        System.out.println("-----------------------");
-
+        System.out.println(e.getClass().getName());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("");
     }
 
