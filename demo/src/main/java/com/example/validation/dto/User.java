@@ -33,20 +33,20 @@ public class User {
         this.age = age;
     }
 
-    // public List<Car> getCars() {
-    //     return cars;
-    // }
+    public List<Car> getCars() {
+        return cars;
+    }
 
-    // public void setCars(List<Car> cars) {
-    //     this.cars = cars;
-    // }
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
 
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                // ", cars=" + cars +
+                ", cars=" + cars +
                 '}';
     }
 }
