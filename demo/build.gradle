@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco' 
 }
 
 group = 'com.example'
@@ -11,6 +12,8 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
+
+
 
 dependencies {
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
