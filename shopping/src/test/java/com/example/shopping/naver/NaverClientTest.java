@@ -34,6 +34,7 @@ public class NaverClientTest {
         search.setQuery("옷집");
 
         var result = naverClient.imageSearch(search);
+      
         System.out.println(result);
 
     }

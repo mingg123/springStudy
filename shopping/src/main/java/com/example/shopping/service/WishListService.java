@@ -39,10 +39,10 @@ public class WishListService {
                 //결과를 리턴
                 var result = new WishListDO();
                 result.setTitle(localItem.getTitle());
-                result.setCategory(searchLocalRes.getCategory());
+                result.setCategory(localItem.getCategory());
                 result.setAddress(localItem.getAddress());
                 result.setReadAddress(localItem.getRoadAddress());
-                result.setHomePageLink(localItem.getLink());
+                result.setHomePageLink(imageItem.getLink());
                 result.setImageLink(localItem.getLink());
                 return result;
             }

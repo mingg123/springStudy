@@ -15,7 +15,7 @@ public class SearchLocalRes {
     private int total;
     private int start;
     private int display;
-    private String category;
+   
     private List<SearchLocalItem> items;
 
 
@@ -26,6 +26,7 @@ public class SearchLocalRes {
     //중요
     public static class SearchLocalItem {
         private String title;
+        private String category;
         private String link;
         private String description;
         private String telephone;
