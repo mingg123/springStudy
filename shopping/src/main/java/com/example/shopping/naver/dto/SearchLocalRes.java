@@ -31,7 +31,7 @@ public class SearchLocalRes {
         private String description;
         private String telephone;
         private String address;
-        private String roadAddress;
+        private String loadAddress;
         private int lastBuildDate;
         private int mapy;
     }

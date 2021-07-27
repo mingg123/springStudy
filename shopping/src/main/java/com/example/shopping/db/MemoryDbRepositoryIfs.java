@@ -5,8 +5,8 @@ import java.util.Optional;
 
 
 public interface MemoryDbRepositoryIfs <T>{
-    Optional<T> findById(int idx);
+    Optional<T> findById(Integer idx);
     T save(T entity);
-    void deleteById(int idx);
-    List<T>listAll();
+    void deleteById(Integer idx);
+    List<T>findAll();
 }

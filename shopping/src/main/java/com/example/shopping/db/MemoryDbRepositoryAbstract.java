@@ -8,11 +8,11 @@ import lombok.var;
 
 public class MemoryDbRepositoryAbstract<T extends MemoryDbEntity> implements MemoryDbRepositoryIfs<T> {
     private final List<T> db = new ArrayList<>();
-    private int index = 0;
+    private Integer index = 0;
 
    
     @Override
-	public Optional<T> findById(int index) {
+	public Optional<T> findById(Integer index) {
         return db.stream().filter(it -> it.getIndex() == index).findFirst();
 		
 	}
@@ -43,7 +43,7 @@ public class MemoryDbRepositoryAbstract<T extends MemoryDbEntity> implements Mem
 
 
     @Override
-	public void deleteById(int getIdx) {
+	public void deleteById(Integer getIdx) {
         var optionalEntity = db.stream().filter(it-> it.getIndex() == index).findFirst();
         if(optionalEntity.isPresent()) {
                 db.remove(optionalEntity.get());
@@ -52,7 +52,7 @@ public class MemoryDbRepositoryAbstract<T extends MemoryDbEntity> implements Mem
 	}
 
     @Override
-	public List<T> listAll() {
+	public List<T> findAll() {
 		return db;
 	}
 

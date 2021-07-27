@@ -16,7 +16,7 @@ public class WishListDO  extends MemoryDbEntity{
     private String title;
     private String category;
     private String address;
-    private String readAddress;
+    private String loadAddress;
     private String homePageLink;
     private String imageLink;
     private boolean isVisit;
