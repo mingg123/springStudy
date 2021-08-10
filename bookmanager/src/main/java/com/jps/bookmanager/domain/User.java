@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
@@ -48,9 +49,9 @@ import lombok.ToString;
 @Entity
 @Table
 @EntityListeners(value = {UserEntityListener.class})
-public class User extends BaseEntity implements Auditable{
+public class User extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @NonNull

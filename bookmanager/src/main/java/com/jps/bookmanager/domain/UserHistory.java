@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.jps.bookmanager.domain.listener.Auditable;
@@ -25,9 +26,9 @@ import lombok.ToString;
 @ToString(callSuper= true)
 @EqualsAndHashCode(callSuper = true)
 // @EntityListeners(value=AuditingEntityListener.class)
-public class UserHistory extends BaseEntity implements Auditable{
+public class UserHistory extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long userId;
