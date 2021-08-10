@@ -1,15 +1,20 @@
 package com.jps.bookmanager.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
@@ -71,6 +76,12 @@ public class User extends BaseEntity {
 
     @Enumerated(value= EnumType.STRING)
     private Gender gender;
+
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)  // user_id가 읽기 전용일경우 insertable, updatable을 사용한다
+    private List<UserHistory> userHistoryes = new ArrayList<>();
+
 
     // @PrePersist
     // public void perPersist() {

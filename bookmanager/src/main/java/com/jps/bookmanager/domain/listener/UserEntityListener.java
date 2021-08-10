@@ -1,5 +1,7 @@
 package com.jps.bookmanager.domain.listener;
 
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -12,8 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserEntityListener {
 
-    @PrePersist
-    @PreUpdate
+    //DB에 저장한 다음 바로 userHistory에 저장한다는 의미
+    @PostPersist
+    @PostUpdate
     public void prePersistAndPreUpdate(Object o) {
         UserHistoryRepository userHistoryRepository = BeanUtils.getBean(UserHistoryRepository.class);
 

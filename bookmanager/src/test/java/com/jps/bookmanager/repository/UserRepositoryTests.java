@@ -198,4 +198,27 @@ public class UserRepositoryTests {
 
         userHistoryRepository.findAll().forEach(System.out::println);
     }
+
+    @Test
+    void userRelationTest() {
+        User user = new User();
+        user.setName("minggggg4");
+        user.setEmail("minggg3@naver.com");
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+        user.setName("suuuuu");
+        userRepository.save(user);
+
+        user.setEmail("suuu@naver.com");
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
+
+        // List<UserHistory> result = userHistoryRepository.findByUserId(userRepository.findByEmail("suuu@naver.com").getId());
+
+        List<UserHistory> result = userRepository.findByEmail("suuu@naver.com")
+        .getUserHistoryes();
+        result.forEach(System.out::println);
+    }
 }
