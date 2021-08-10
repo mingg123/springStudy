@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,12 +31,23 @@ public class Author extends BaseEntity{
 
     private String country;
 
-    @ManyToMany
+    // @ManyToMany
+
+    // @JoinColumn(name="author_id")
+    // @ToString.Exclude
+    // private List<Book> books = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name="author_id")
     @ToString.Exclude
-    private List<Book> books = new ArrayList<>();
+    private List<BookAndAuthor> bookAndAuthors = new ArrayList<>();
 
-
-    public void addBook(Book... book) {
-        Collections.addAll(this.books, book);
+    public void addBookAndAuthors(BookAndAuthor... bookAndAuthors) {
+        Collections.addAll(this.bookAndAuthors, bookAndAuthors);
     }
+
+
+    // public void addBook(Book... book) {
+    //     Collections.addAll(this.books, book);
+    // }
 }
