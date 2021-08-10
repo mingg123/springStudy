@@ -1,8 +1,10 @@
-package com.jps.bookmanager.domain;
+package com.jps.bookmanager.domain.listener;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import com.jps.bookmanager.domain.User;
+import com.jps.bookmanager.domain.UserHistory;
 import com.jps.bookmanager.repository.UserHistoryRepository;
 import com.jps.bookmanager.support.BeanUtils;
 

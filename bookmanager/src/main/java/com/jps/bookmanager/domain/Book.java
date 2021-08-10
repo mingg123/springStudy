@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import com.jps.bookmanager.domain.listener.Auditable;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
@@ -17,8 +19,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-@EntityListeners(value = AuditingEntityListener.class)
-public class Book implements Auditable{
+// @EntityListeners(value = AuditingEntityListener.class)
+public class Book extends BaseEntity implements Auditable{
     @Id
     @GeneratedValue
     private Long id;
@@ -27,9 +29,9 @@ public class Book implements Auditable{
 
     private String author;
 
-    private LocalDateTime createdAt;
+    // private LocalDateTime createdAt;
 
-    private LocalDateTime updatedAt;
+    // private LocalDateTime updatedAt;
 
     // @PrePersist
     // public void perPersist(){

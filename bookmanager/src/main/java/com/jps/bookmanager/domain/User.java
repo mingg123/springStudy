@@ -18,6 +18,9 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.jps.bookmanager.domain.listener.Auditable;
+import com.jps.bookmanager.domain.listener.UserEntityListener;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -44,8 +47,8 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table
-@EntityListeners(value = {AuditingEntityListener.class, UserEntityListener.class})
-public class User implements Auditable{
+@EntityListeners(value = {UserEntityListener.class})
+public class User extends BaseEntity implements Auditable{
     @Id
     @GeneratedValue
     private Long id;
@@ -56,11 +59,11 @@ public class User implements Auditable{
     private String email;
 
     // @Column(name="crtddt")
-    @CreatedDate
-    private LocalDateTime createdAt;
+    // @CreatedDate
+    // private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+    // @LastModifiedDate
+    // private LocalDateTime updatedAt;
 
     @Transient
     private String testData;
