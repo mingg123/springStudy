@@ -4,11 +4,13 @@ package com.jps.bookmanager.repository;
 
 import static org.mockito.ArgumentMatchers.contains;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.jps.bookmanager.domain.Gender;
 import com.jps.bookmanager.domain.User;
 
 import org.assertj.core.util.Lists;
@@ -33,12 +35,12 @@ public class UserRepositoryTests {
     void curd() {
 
         User user1 = new User("ming", "jack@naver.com");
-        User user2 = new User("steave", "jack@naver.com");
-        User user3 = new User("steave2", "jack2@naver.com");
+        // User user2 = new User("steave", "jack@naver.com");
+        // User user3 = new User("steave2", "jack2@naver.com");
 
-        // User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
         // user.setEmail("martin-update@fastcampus.com");
-        // userRepository.save(user);
+        userRepository.save(user);
 
         // ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("email" , contains().ignoreCase());
 
@@ -109,5 +111,74 @@ public class UserRepositoryTests {
         System.out.println("findByEmail " + userRepository.findUserByEmail("jack@naver.com"));
         System.out.println("findFirst1ByName" + userRepository.findFirst1ByName("jack@naver.com"));
         System.out.println("findLast1ByName" + userRepository.findLast1ByName("ming"));
+    }
+
+    @Test
+    void insertAndUpdateTest() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("mingggg");
+        user.setEmail("mingg@naver.com");
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setId(2L);
+        user2.setName("mingggggg2");
+        user2.setEmail("mingggg2@naver.com");
+
+        userRepository.save(user2);
+    }
+
+    @Test
+    void enumTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+        userRepository.findAll().forEach(System.out::println);
+
+        System.out.println(userRepository.findRowRecord().get("gender"));
+    }
+
+    @Test
+    void listenerTest() {
+        User user = new User();
+        user.setEmail("mingg@naver.com");
+        user.setName("mingg");
+
+        userRepository.save(user);
+
+        User user2= userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("mingggg2");
+        user2.setEmail("mingggg2@naver.com");
+
+        userRepository.deleteById(2L);
+    }
+
+    @Test
+    void prePersistestTest() {
+        User user = new User();
+        user.setEmail("minggg@naver.com");
+        user.setName("minggg");
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+        userRepository.save(user);
+
+        System.out.println(userRepository.findByEmail("minggg@naver.com"));
+    }
+
+    @Test
+    void preUpdateTest() {
+        User user = new User();
+        user.setEmail("minggg@naver.com");
+        user.setName("minggg");
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        System.out.println("as-is :" + user2);
+        user.setName("mingggg");
+        userRepository.save(user2);
+
+        System.out.println("to-be: " + userRepository.findAll().get(0));
     }
 }
