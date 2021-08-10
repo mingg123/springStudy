@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.jps.bookmanager.domain.listener.Auditable;
 
@@ -32,12 +33,16 @@ public class UserHistory extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "user_id")
+    @Column(name= "user_id", insertable = false, updatable = false)
     private Long userId;
 
     private String name;
 
     private String email;
+
+    @ManyToOne
+    private User user;
+
 
     // @CreatedDate
     // private LocalDateTime createdAt;

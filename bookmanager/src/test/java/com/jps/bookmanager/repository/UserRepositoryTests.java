@@ -38,7 +38,7 @@ public class UserRepositoryTests {
     @Transactional
     void curd() {
 
-        User user1 = new User("ming", "jack@naver.com");
+        // User user1 = new User("ming", "jack@naver.com");
         // User user2 = new User("steave", "jack@naver.com");
         // User user3 = new User("steave2", "jack2@naver.com");
 
@@ -103,8 +103,8 @@ public class UserRepositoryTests {
     }
     @Test
     void select() {
-        User user = new User("ming", "jack@naver.com");
-        userRepository.save(user);
+        // User user = new User("ming", "jack@naver.com");
+        // userRepository.save(user);
         System.out.println(userRepository.findByName("ming"));
         System.out.println("findByEmail " + userRepository.findByEmail("jack@naver.com"));
         System.out.println("findByEmail " + userRepository.getByEmail("jack@naver.com"));
@@ -220,5 +220,7 @@ public class UserRepositoryTests {
         List<UserHistory> result = userRepository.findByEmail("suuu@naver.com")
         .getUserHistoryes();
         result.forEach(System.out::println);
+
+        System.out.println("UserHistory.getUser() :" + userHistoryRepository.findAll().get(0).getUser());
     }
 }

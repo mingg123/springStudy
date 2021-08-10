@@ -45,15 +45,20 @@ import lombok.ToString;
 // @Setter
 // @Getter
 // @ToString
+// @NoArgsConstructor
+// @AllArgsConstructor
+// @RequiredArgsConstructor
+// // @EqualsAndHashCode
+// @Data
+// @Builder
+// @Entity
+// @Table
+// @EntityListeners(value = {UserEntityListener.class})
+
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
-// @EqualsAndHashCode
 @Data
-@Builder
-@Entity
-@Table
-@EntityListeners(value = {UserEntityListener.class})
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,8 +85,14 @@ public class User extends BaseEntity {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)  // user_id가 읽기 전용일경우 insertable, updatable을 사용한다
+    @ToString.Exclude
     private List<UserHistory> userHistoryes = new ArrayList<>();
 
+
+   @OneToMany
+    @JoinColumn(name="user_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
 
     // @PrePersist
     // public void perPersist() {
