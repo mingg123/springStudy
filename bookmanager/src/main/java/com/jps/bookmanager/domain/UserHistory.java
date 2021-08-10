@@ -6,9 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
@@ -17,28 +17,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-@EntityListeners(value = AuditingEntityListener.class)
-public class Book implements Auditable{
+@EntityListeners(value=AuditingEntityListener.class)
+public class UserHistory  implements Auditable{
     @Id
     @GeneratedValue
     private Long id;
 
+    private Long userId;
+
     private String name;
 
-    private String author;
+    private String email;
 
+    @CreatedDate
     private LocalDateTime createdAt;
 
+    @LastModifiedDate
     private LocalDateTime updatedAt;
-
-    // @PrePersist
-    // public void perPersist(){
-    //     this.createdAt = LocalDateTime.now();
-    //     this.updatedAt = LocalDateTime.now();
-    // }
-
-    // @PreUpdate
-    // public void preUpdate() {
-    //     this.updatedAt = LocalDateTime.now();
-    // }
 }

@@ -18,6 +18,10 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,7 +44,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table
-@EntityListeners(value = MyEntityListner.class)
+@EntityListeners(value = {AuditingEntityListener.class, UserEntityListener.class})
 public class User implements Auditable{
     @Id
     @GeneratedValue
@@ -52,7 +56,10 @@ public class User implements Auditable{
     private String email;
 
     // @Column(name="crtddt")
+    @CreatedDate
     private LocalDateTime createdAt;
+
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     @Transient

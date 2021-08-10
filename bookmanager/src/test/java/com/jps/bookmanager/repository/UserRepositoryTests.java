@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import com.jps.bookmanager.domain.Gender;
 import com.jps.bookmanager.domain.User;
+import com.jps.bookmanager.domain.UserHistory;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,9 @@ import org.springframework.data.domain.PageRequest;
 public class UserRepositoryTests {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserHistoryRepository userHistoryRepository;
 
     @Test
     @Transactional
@@ -180,5 +184,18 @@ public class UserRepositoryTests {
         userRepository.save(user2);
 
         System.out.println("to-be: " + userRepository.findAll().get(0));
+    }
+
+    @Test
+    void userHistoryTest() {
+        User user = new User();
+        user.setEmail("mingg@naver.com");
+        user.setName("minggg2");
+        userRepository.save(user);
+
+        user.setName("mingg3");
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
     }
 }
