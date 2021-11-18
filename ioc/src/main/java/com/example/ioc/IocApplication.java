@@ -2,6 +2,9 @@ package com.example.ioc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class IocApplication {
@@ -44,7 +47,39 @@ public class IocApplication {
 
 		// 외부에서 주입을 받는게 DI임 위존 가진것을 넘겨주는거.
 
-		// SpringApplication.run(IocApplication.class, args);
+		SpringApplication.run(IocApplication.class, args);
+		ApplicationContext context = ApplicationContextProvider.getContext();
+
+		Base64Encoder base64Encoder = context.getBean(Base64Encoder.class);
+		UrlEncoder urlEncoder2 = context.getBean(UrlEncoder.class);
+		Encoder encoder3 = new Encoder(base64Encoder);
+		String result3 = encoder3.encode(url);
+		System.out.println("Encoder3 : ----------------");
+		System.out.println(result3);
+
+		encoder3.setIEncoder(urlEncoder2);
+		String result4 = encoder3.encode(url);
+		System.out.println("Encoder4 : ----------------");
+		System.out.println(result4);
+
+		Encoder encoder5 = context.getBean("base64Encode", Encoder.class);
+		System.out.println("Encoder5 : ----------------");
+		String result5 = encoder5.encode(url);
+		System.out.println(result5);
 	}
 
+}
+
+@Configuration
+class AppConfig {
+
+	@Bean("base64Encode")
+	public Encoder encoder(Base64Encoder base64Encoder) {
+		return new Encoder(base64Encoder);
+	}
+
+	@Bean("UrlEncode")
+	public Encoder encoder(UrlEncoder urlEncoder) {
+		return new Encoder(urlEncoder);
+	}
 }
