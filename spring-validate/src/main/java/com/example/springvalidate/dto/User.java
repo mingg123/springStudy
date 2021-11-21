@@ -8,6 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.example.springvalidate.annotation.YearMonth;
+
 public class User {
 
     private String name;
@@ -17,6 +19,7 @@ public class User {
     private String email;
 
     @Size(min = 6, max = 6)
+    @YearMonth(pattern = "yyyyMM")
     private String reqYearMonth;
 
     public String getReqYearMonth() {
@@ -28,7 +31,7 @@ public class User {
     }
     // yyyymm
 
-    @Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$")
+    // @Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$")
     private String phoneNumber;
 
     public String getName() {
@@ -63,18 +66,18 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    @AssertTrue(message = "yyyyMM 형식에 맞지 않습니다.")
-    public boolean isReqYearMonthValidation() {
-        // Sytstem.out.println("AsertTrue");
-        try {
-            LocalDate localDate = LocalDate.parse(this.getReqYearMonth() + "01",
-                    DateTimeFormatter.ofPattern("yyyyMMdd"));
-        } catch (Exception e) {
-            return false;
-        }
+    // @AssertTrue(message = "yyyyMM 형식에 맞지 않습니다.")
+    // public boolean isReqYearMonthValidation() {
+    // // Sytstem.out.println("AsertTrue");
+    // try {
+    // LocalDate localDate = LocalDate.parse(this.getReqYearMonth() + "01",
+    // DateTimeFormatter.ofPattern("yyyyMMdd"));
+    // } catch (Exception e) {
+    // return false;
+    // }
 
-        return true;
-    }
+    // return true;
+    // }
 
     @Override
     public String toString() {

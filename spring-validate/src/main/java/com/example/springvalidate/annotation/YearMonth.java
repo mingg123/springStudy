@@ -17,7 +17,9 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.Email.List;
 
-@Constraint(validatedBy = {})
+import com.example.springvalidate.validator.YearMonthValidator;
+
+@Constraint(validatedBy = { YearMonthValidator.class })
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
 public @interface YearMonth {
@@ -34,6 +36,6 @@ public @interface YearMonth {
      */
     Class<? extends Payload>[] payload() default {};
 
-    String pattern();
+    String pattern() default "YYYYMM";
 
 }
