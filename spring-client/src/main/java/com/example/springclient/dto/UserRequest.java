@@ -1,6 +1,6 @@
 package com.example.springclient.dto;
 
-public class UserResponse {
+public class UserRequest {
     private String name;
     private int age;
 
@@ -24,5 +24,4 @@ public class UserResponse {
     public String toString() {
         return name + " " + age;
     }
-
 }
