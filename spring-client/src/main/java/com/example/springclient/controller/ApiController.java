@@ -1,5 +1,6 @@
 package com.example.springclient.controller;
 
+import com.example.springclient.dto.Req;
 import com.example.springclient.dto.UserResponse;
 import com.example.springclient.service.RestTemplateService;
 
@@ -22,8 +23,16 @@ public class ApiController {
         return restTemplateService.hello();
     }
 
+    // @PostMapping("")
+    // public UserResponse post() {
+    // // return restTemplateService.post();
+    // // return restTemplateService.exchange();
+    // return restTemplateService.genericExchane();
+    // }
+
     @PostMapping("")
-    public UserResponse post() {
-        return restTemplateService.post();
+    public Req<UserResponse> post() {
+        return restTemplateService.genericExchane();
     }
+
 }
