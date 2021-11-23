@@ -27,6 +27,21 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/springapi/server")
 public class ServerApiController {
 
+    @GetMapping("/naverShopping")
+    public String naverShopping() {
+        String cloth = "원피스";
+        // https://openapi.naver.com/v1/search/shop.xml?query=%EC%A3%BC%EC%8B%9D&display=10&start=1&sort=sim
+        URI uri = UriComponentsBuilder.fromUriString("https://openapi.naver.com").path("/v1/search/shop")
+                .queryParam("query", cloth).queryParam("display", 10).queryParam("start", 1).queryParam("sort", "sim")
+                .encode().build().toUri();
+
+        RestTemplate restTemplate = new RestTemplate();
+        RequestEntity<Void> requestEntity = RequestEntity.get(uri).header("X-Naver-Client-Id", "a")
+                .header("X-Naver-Client-Secret", "nGRNNb_CStH").build();
+        ResponseEntity<String> result = restTemplate.exchange(requestEntity, String.class);
+        return result.getBody();
+    }
+
     @GetMapping("/naver")
     // https://openapi.naver.com/v1/search/local.xml?query=갈비집&display=10&start=1&sort=random
     public String naver() {
@@ -38,8 +53,8 @@ public class ServerApiController {
                 .queryParam("sort", "random").encode().build().toUri();
 
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<Void> req = RequestEntity.get(uri).header("X-Naver-Client-Id", "2lWzsgurEbA9GM8DhY7s")
-                .header("X-Naver-Client-Secret", "nGRNN_CStH").build();
+        RequestEntity<Void> req = RequestEntity.get(uri).header("X-Naver-Client-Id", "a")
+                .header("X-Naver-Client-Secret", "b").build();
 
         ResponseEntity<String> result = restTemplate.exchange(req, String.class);
         return result.getBody();
