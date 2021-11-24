@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WishListDto {
-    private Integer index;
+    private int index;
     private String title;
     private String category;
     private String address;
