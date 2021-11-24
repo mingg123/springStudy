@@ -7,7 +7,7 @@ import java.util.Optional;
 abstract public class MemoryDbRepositoryAbstract<T extends MemoryDbEntity> implements MeMoryDbRepositoryIfs<T> {
 
     private final List<T> db = new ArrayList<>();
-    private int index = 0;
+    private Integer index = 0;
 
     @Override
     public Optional<T> findById(int index) {
@@ -44,7 +44,7 @@ abstract public class MemoryDbRepositoryAbstract<T extends MemoryDbEntity> imple
     }
 
     @Override
-    public List<T> listAll() {
+    public List<T> findAll() {
         return db;
     }
 
