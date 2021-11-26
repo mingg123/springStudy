@@ -23,7 +23,7 @@
         $.ajax({
           type: "POST",
           async: true,
-          url: `/api/restaurant/${index}`,
+          url: `/springapi/restaurant/${index}`,
           timeout: 3000,
         });
 
@@ -33,7 +33,7 @@
         $.ajax({
           type: "DELETE",
           async: true,
-          url: `/api/restaurant/${index}`,
+          url: `/springapi/restaurant/${index}`,
           timeout: 3000,
         });
         getWishList();

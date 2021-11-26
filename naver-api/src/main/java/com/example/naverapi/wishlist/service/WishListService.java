@@ -14,7 +14,9 @@ import com.example.naverapi.wishlist.repository.WishListRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class WishListService {
@@ -104,6 +106,7 @@ public class WishListService {
     }
 
     public void addVisit(int index) {
+        log.info("index : {}", index);
         var wishItem = wishListRepository.findById(index);
         if (wishItem.isPresent()) {
             var item = wishItem.get();
