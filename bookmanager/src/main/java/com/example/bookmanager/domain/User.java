@@ -2,6 +2,10 @@ package com.example.bookmanager.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +23,11 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Data
 @Builder
+@Entity
 public class User {
+    @Id // pk임
+    @GeneratedValue // 1씩 증가
+    private Long id;
     @NonNull
     private String name;
     @NonNull
@@ -27,10 +35,4 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // @Override
-    // public String toString() {
-    // return getClass().getName() + " : " + "name = " + name + "email = " + email +
-    // "createAt = " + createdAt
-    // + "updateAt = " + updatedAt;
-    // }
 }

@@ -1,0 +1,14 @@
+spring:
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+    defer-datasource-initialization: true
+server:
+  port: 8070

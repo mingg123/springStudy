@@ -12,7 +12,7 @@ public class UserTest {
         user.setName("mingg");
         System.out.println(">>> " + user);
 
-        User user1 = new User("martin", "martin@fastcampus.com", LocalDateTime.now(), LocalDateTime.now());
+        User user1 = new User(null, "martin", "martin@fastcampus.com", LocalDateTime.now(), LocalDateTime.now());
         User user2 = new User("martin", "martin@fastcampus.com");
 
         // @Builder는 이런식으로 쓸 수 있음
