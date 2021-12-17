@@ -1,10 +1,13 @@
 package com.example.bookmanager.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,5 +37,8 @@ public class User {
     private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Addres> address;
 
 }

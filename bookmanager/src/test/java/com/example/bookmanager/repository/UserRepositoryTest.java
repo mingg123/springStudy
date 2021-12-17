@@ -13,12 +13,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.*;
 
 import javax.transaction.Transactional;
 
 @SpringBootTest
+@WebAppConfiguration
 public class UserRepositoryTest {
 
     @Autowired
@@ -26,6 +29,7 @@ public class UserRepositoryTest {
 
     @Test
     @Transactional
+
     void crud() {
         System.out.println("crud : -----------------------------------");
         // List<User> users = userRepository.findAll();
@@ -71,7 +75,7 @@ public class UserRepositoryTest {
         // 3L))); //성능상의문제로 잘 사용안함
         // userRepository.deleteInBatch(userRepository.findAllById(Lists.newArrayList(1L,
         // 3L)));
-        userRepository.deleteAllInBatch();
+        userRepository.deleteAll();
         userRepository.findAll().forEach(System.out::println);
     }
 
@@ -107,5 +111,66 @@ public class UserRepositoryTest {
 
         userRepository.findAll(example).forEach(System.out::println);
 
+    }
+
+    @Test
+    void update() {
+        userRepository.save(new User("david", "david@fastcampus.com"));
+        User user = userRepository.findById(1L).orElseThrow(null);
+        user.setEmail("martin-update@fastcampus.com");
+        userRepository.save(user);
+
+    }
+
+    @Test
+    void jpaTest() {
+        // System.out.println("findByIdNotEmpty" + userRepository.findByIdIsNotEmpty());
+        System.out.println("findByAddressIsNotEmpty" +
+                userRepository.findByAddressIsNotEmpty());
+        System.out.println(
+                "findByAddressIsNotEmpty" +
+                        userRepository.findByNameIn(Lists.newArrayList("martin", "dennis")));
+        System.out.println(
+                "findByNameStartingWith" + userRepository.findByNameStartingWith("mar"));
+        System.out.println(
+                "findByNameEndingWith" + userRepository.findByNameEndingWith("tin"));
+        System.out.println(
+                "findByNameContains" + userRepository.findByNameContains("art"));
+        System.out.println(
+                "findByNameLike" + userRepository.findByNameLike("%art%"));
+
+        System.out.println(
+                "findByTop1ByName" + userRepository.findTop1ByName("martin"));
+        System.out.println(
+                "findLast1ByName" + userRepository.findLast1ByName("martin"));
+
+        System.out.println(
+                "findTop1ByNameOrderByIdDesc" + userRepository.findTop1ByNameOrderByIdDesc("martin"));
+
+        System.out.println(
+                "findFirstByNameOrderByIdDescEmailAsc" + userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
+
+    }
+
+    @Test
+    void jpaTest2() {
+        // 메소드 하나로 쓸 수 있기 때문에 코드의 가독성에 좋다. sort key가 여러개 늘어나기 때문에
+        System.out.println(
+                "findFirstByName" + userRepository.findFirstByName("martin", Sort.by(Order.asc("id"))));
+
+        System.out.println(
+                "findFirstByNameWithSortParams"
+                        + userRepository.findFirstByName("martin", Sort.by(Order.asc("id"), Order.asc("email"))));
+
+        System.out.println(
+                "findFirstByNameWithSortParams"
+                        + userRepository.findFirstByName("martin", getSort()));
+    }
+
+    private Sort getSort() {
+        return Sort.by(
+                Order.desc("id"),
+                Order.asc("email"),
+                Order.desc("createdAt"));
     }
 }
