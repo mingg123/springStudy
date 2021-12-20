@@ -4,6 +4,8 @@ import com.example.bookmanager.domain.User;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
 import java.util.*;
 
 //처음은 entityType 두번째 인자는 PK의 Type
@@ -38,5 +40,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findFirstByNameOrderByIdDescEmailAsc(String name);
 
     List<User> findFirstByName(String name, Sort sort);
+
+    @Query(value = "select * from user limit 1;", nativeQuery = true)
+    Map<String, Object> findRawRecord();
 
 }

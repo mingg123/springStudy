@@ -1,5 +1,6 @@
 package com.example.bookmanager.repository;
 
+import com.example.bookmanager.domain.Gender;
 import com.example.bookmanager.domain.User;
 
 import org.assertj.core.util.Lists;
@@ -172,5 +173,27 @@ public class UserRepositoryTest {
                 Order.desc("id"),
                 Order.asc("email"),
                 Order.desc("createdAt"));
+    }
+
+    @Test
+    void insertAndUpdateTest() {
+        User user = new User();
+        user.setName("martin");
+        user.setEmail("martin2@fastcampus.com");
+
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("marrrrrtin");
+        userRepository.save(user2);
+    }
+
+    @Test
+    void enumTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+        userRepository.save(user);
+        userRepository.findAll().forEach(System.out::println);
+        System.out.println(userRepository.findRawRecord().get("gender"));
     }
 }
