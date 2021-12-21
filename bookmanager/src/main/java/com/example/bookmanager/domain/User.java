@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.OneToMany;
@@ -39,6 +40,8 @@ import lombok.ToString;
 public class User {
     @Id // pk임
     @GeneratedValue // 1씩 증가
+    // 이거 사용하면 hibernate_sequence 주석처리 해주어야함.
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     private String name;
